@@ -13,8 +13,21 @@ mongoose
   });
 
 const contactSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+    type: String,
+    minlength: 3,
+    required: true,
+  },
+  number: {
+    type: String,
+    minlength: 8,
+    validate: {
+      function(val) {
+        return /^\d{2,3}-\d{7,}/.test(val);
+      },
+    },
+    required: true,
+  },
 });
 
 contactSchema.set("toJSON", {
