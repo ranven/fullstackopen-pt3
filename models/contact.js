@@ -22,9 +22,10 @@ const contactSchema = new mongoose.Schema({
     type: String,
     minlength: 8,
     validate: {
-      function(val) {
+      validator: function (val) {
         return /^\d{2,3}-\d{7,}/.test(val);
       },
+      message: (props) => `${props.value} doesn't meet the requirements`,
     },
     required: true,
   },
